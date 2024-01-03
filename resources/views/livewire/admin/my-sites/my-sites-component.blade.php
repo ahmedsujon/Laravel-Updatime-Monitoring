@@ -23,6 +23,9 @@
                             <button class="btn btn-sm btn-dark waves-effect waves-light" data-bs-toggle="modal"
                                 data-bs-target="#addDataModal" style="float: right;"><i class="bx bx-plus"></i> Add
                                 Admin</button>
+                            <button type="button" wire:click="$refresh"
+                                class="btn btn-sm btn-dark waves-effect waves-light"
+                                style="float: right; margin-right: 5px;"><i class="bx bx-plus"></i>Refresh</button>
                         </div>
                         <div class="card-body">
                             <div class="row mb-3">
@@ -58,31 +61,39 @@
                                         <tr>
                                             <th class="align-middle">ID</th>
                                             <th class="align-middle">Site</th>
+                                            <th class="align-middle">SSL Issuer</th>
                                             <th class="align-middle text-center">Uptime</th>
-                                            <th class="align-middle text-center">Last checked</th>
                                             <th class="align-middle text-center">Certificate health</th>
+                                            <th class="align-middle text-center">Last checked</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                       
                                         @if ($mysites->count() > 0)
                                             @foreach ($mysites as $mysite)
                                                 <tr>
                                                     <td>{{ $mysite->id }}</td>
                                                     <td>{{ $mysite->url }}</td>
+                                                    <td>{{ $mysite->certificate_issuer }}</td>
                                                     <td class="text-center">
                                                         @if ($mysite->uptime_status == 'up')
-                                                        <a href="{{ route('admin.mysites.details', ['id' => $mysite->id]) }}" class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i class="bx bx-up-arrow-alt ms-1"></i></a></td>
-                                                        @else
-                                                        <a href="#" class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i class="bx bx-down-arrow-alt ms-1"></i></a></td>
-                                                        @endif
-                                                    <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
-                                                    <td class="text-center">{{ $mysite->certificate_status }}</td>
-                                                </tr>
-                                            @endforeach
-                                        @else
-                                            <tr>
-                                                <td colspan="7" class="text-center pt-5 pb-5">No my sites found!</td>
+                                                            <a href="{{ route('admin.mysites.details', ['id' => $mysite->id]) }}"
+                                                                class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
+                                                                    class="bx bx-up-arrow-alt ms-1"></i></a>
+                                                    </td>
+                                                @else
+                                                    <a href="#"
+                                                        class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
+                                                            class="bx bx-down-arrow-alt ms-1"></i></a></td>
+                                            @endif
+                                            <td class="text-center">{{ $mysite->certificate_status }}</td>
+                                            <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
                                             </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="7" class="text-center pt-5 pb-5">No my sites found!</td>
+                                        </tr>
                                         @endif
                                     </tbody>
                                 </table>
