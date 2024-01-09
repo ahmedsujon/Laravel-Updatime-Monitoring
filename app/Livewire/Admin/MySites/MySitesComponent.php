@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class MySitesComponent extends Component
 {
     use WithPagination;
-    public $sortingValue = 10, $searchTerm;
+    public $sortingValue = 50, $searchTerm;
     public $edit_id, $delete_id;
     public $url, $uptime_status, $uptime_last_check_date, $certificate_status, $certificate_expiration_date,
         $certificate_issuer, $certificate_check_failure_reason, $uptime_status_last_change_date, $uptime_check_method;

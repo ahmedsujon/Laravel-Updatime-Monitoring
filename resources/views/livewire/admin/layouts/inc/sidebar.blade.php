@@ -30,14 +30,15 @@
                     @if (isAdminPermitted('users_manage') || isAdminPermitted('admins_manage'))
                         <li class="menu-title" key="t-user">User</li>
                     @endif
-                    @if (isAdminPermitted('users_manage'))
+                    {{-- @if (isAdminPermitted('users_manage'))
                         <li>
                             <a href="{{ route('admin.allUsers') }}" class="waves-effect">
                                 <i class="bx bx-user"></i>
                                 <span key="t-chat">All Users</span>
                             </a>
                         </li>
-                    @endif
+                    @endif --}}
+                    
                     @if (isAdminPermitted('admins_manage'))
                         <li>
                             <a href="{{ route('admin.allAdmins') }}" class="waves-effect">

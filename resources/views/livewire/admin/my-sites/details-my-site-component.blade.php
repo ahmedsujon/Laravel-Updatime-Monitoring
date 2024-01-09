@@ -25,6 +25,14 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-md-12" style="border: 1px solid #e9e9e9; padding: 35px 15px;">
+                                    <h3 style="text-align: center;" class="mb-4"><i style="color: green;" class="bx bxs-up-arrow-circle"></i><a style="color: black;" href="{{ $mysite->url }}" target="_blank">{{ $mysite->url }}</a></h3>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p style="text-align: center;" class="text-muted">Your site is up. We last checked less than a minute ago.</p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-4" style="border: 1px solid #e9e9e9; padding: 35px 15px;">
                                     <h3 style="text-align: center;" class="mb-4"><i style="color: green;" class="bx bxs-up-arrow-circle"></i>Uptime</h3>
                                     <div class="row">

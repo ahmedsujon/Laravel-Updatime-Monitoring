@@ -74,7 +74,8 @@
                                             @foreach ($mysites as $mysite)
                                                 <tr>
                                                     <td>{{ $mysite->id }}</td>
-                                                    <td>{{ $mysite->url }}</td>
+                                                    <td><a href="{{ $mysite->url }}"
+                                                            target="_blank">{{ $mysite->url }}</a></td>
                                                     <td>{{ $mysite->certificate_issuer }}</td>
                                                     <td class="text-center">
                                                         @if ($mysite->uptime_status == 'up')
@@ -83,9 +84,10 @@
                                                                     class="bx bx-up-arrow-alt ms-1"></i></a>
                                                     </td>
                                                 @else
-                                                    <a href="#"
+                                                    <a href="{{ route('admin.mysites.details', ['id' => $mysite->id]) }}"
                                                         class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
-                                                            class="bx bx-down-arrow-alt ms-1"></i></a></td>
+                                                            class="bx bx-down-arrow-alt ms-1"></i></a>
+                                                    </td>
                                             @endif
                                             <td class="text-center">{{ $mysite->certificate_status }}</td>
                                             <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
