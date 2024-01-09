@@ -8,6 +8,7 @@ use App\Livewire\Admin\Users\UsersComponent;
 use App\Livewire\Admin\Users\AdminsComponent;
 use App\Livewire\Admin\Auth\ForgotPasswordComponent;
 use App\Livewire\Admin\Auth\UpdatePasswordComponent;
+use App\Livewire\Admin\DomainExpiry\DomainExpiryComponent;
 use App\Livewire\Admin\MySites\DetailsMySiteComponent;
 use App\Livewire\Admin\MySites\MySitesComponent;
 
@@ -35,6 +36,8 @@ Route::prefix('admin/')->name('admin.')->middleware('auth:admin')->group(functio
     // My site routes
     Route::get('my-sites', MySitesComponent::class)->name('mysites');
     Route::get('my-sites-details/{id}', DetailsMySiteComponent::class)->name('mysites.details');
+
+    Route::get('my-doamin', DomainExpiryComponent::class)->name('domains');
 
     //user management
     Route::get('all-users', UsersComponent::class)->name('allUsers')->middleware('adminPermission:users_manage');

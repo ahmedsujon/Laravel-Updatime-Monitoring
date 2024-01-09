@@ -26,6 +26,16 @@
                         </li>
                     @endif
 
+                    @if (isAdminPermitted('settings_manage'))
+                    <li class="menu-title" key="t-setting">My Domain</li>
+                    <li>
+                        <a href="{{ route('admin.domains') }}" class="waves-effect">
+                            <i class="bx bx-wrench"></i>
+                            <span key="t-chat">My Domain</span>
+                        </a>
+                    </li>
+                @endif
+
 
                     @if (isAdminPermitted('users_manage') || isAdminPermitted('admins_manage'))
                         <li class="menu-title" key="t-user">User</li>
