@@ -65,10 +65,11 @@
                                             <th class="align-middle text-center">Uptime</th>
                                             <th class="align-middle text-center">Certificate health</th>
                                             <th class="align-middle text-center">Last checked</th>
+                                            <th class="align-middle text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
+
                                         @if ($mysites->count() > 0)
                                             @foreach ($mysites as $mysite)
                                                 <tr>
@@ -88,6 +89,21 @@
                                             @endif
                                             <td class="text-center">{{ $mysite->certificate_status }}</td>
                                             <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
+                                            <td class="text-center">
+                                                <button
+                                                    class="btn btn-sm btn-soft-primary waves-effect waves-light action-btn edit_btn"
+                                                    wire:click.prevent='editData({{ $mysite->id }})'
+                                                    wire:loading.attr='disabled'>
+                                                    <i
+                                                        class="mdi mdi-square-edit-outline font-size-13 align-middle"></i>
+                                                </button>
+                                                <button
+                                                    class="btn btn-sm btn-soft-danger waves-effect waves-light action-btn delete_btn"
+                                                    wire:click.prevent='deleteConfirmation({{ $mysite->id }})'
+                                                    wire:loading.attr='disabled'>
+                                                    <i class="bx bx-trash font-size-13 align-middle"></i>
+                                                </button>
+                                            </td>
                                             </tr>
                                         @endforeach
                                     @else
@@ -107,6 +123,113 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Add Data Modal -->
+    <div wire:ignore.self class="modal fade" id="addDataModal" tabindex="-1" role="dialog" data-bs-backdrop="static"
+        data-bs-keyboard="false" aria-labelledby="modelTitleId">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-zoom modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: white;">
+                    <h5 class="modal-title m-0" id="mySmallModalLabel">Add New Site</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-11">
+                            <form wire:submit.prevent='storeData' enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="example-number-input" class="col-form-label">URL</label>
+                                        <input class="form-control mb-2" type="text" wire:model="url"
+                                            placeholder="https://intrigueit.com/">
+                                        @error('url')
+                                            <p class="text-danger" style="font-size: 11.5px;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="mb-3 row mt-4">
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light w-50">
+                                            {!! loadingStateWithText('storeData', 'Start Monitoring') !!}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Data Modal -->
+    <div wire:ignore.self class="modal fade" id="editDataModal" tabindex="-1" role="dialog"
+        data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modelTitleId">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-zoom modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: white;">
+                    <h5 class="modal-title m-0" id="mySmallModalLabel">Edit Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        wire:click.prevent='close'></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-11">
+                            <form wire:submit.prevent='updateData'>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="example-number-input" class="col-form-label">URL</label>
+                                        <input class="form-control mb-2" type="text" wire:model="url"
+                                            placeholder="https://intrigueit.com/">
+                                        @error('url')
+                                            <p class="text-danger" style="font-size: 11.5px;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="mb-3 row mt-4">
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light w-50">
+                                            {!! loadingStateWithText('updateData', 'Update Monitoring') !!}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Edit Data Modal -->
+
+    <!-- Delete Modal -->
+    <div wire:ignore.self class="modal fade" id="deleteDataModal" tabindex="-1" role="dialog"
+        aria-labelledby="modelTitleId">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-zoom modal-md" role="document">
+            <div class="modal-content p-5 bg-transparent border-0">
+                <div class="modal-body pt-4 pb-4 bg-white" style="border-radius: 10px;">
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-md-11 text-center">
+                            <div class="swal2-icon swal2-warning swal2-icon-show" style="display: flex;">
+                                <div class="swal2-icon-content">!</div>
+                            </div>
+                            <h2>Are you sure?</h2>
+                            <p class="mb-4">You won't be able to revert this!</p>
+
+                            <button type="button" class="btn btn-sm btn-success waves-effect waves-light"
+                                wire:click.prevent='deleteData' wire:loading.attr='disabled'>
+                                {!! loadingStateWithText('deleteData', 'Yes, Delete.') !!}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger waves-effect waves-light"
+                                data-bs-dismiss="modal">No, Cancel.</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Delete Modal -->
 </div>
 
 @push('scripts')
@@ -119,7 +242,7 @@
             $('#editDataModal').modal('hide');
         });
 
-        window.addEventListener('admin_deleted', event => {
+        window.addEventListener('monitor_deleted', event => {
             $('#deleteDataModal').modal('hide');
             Swal.fire(
                 "Deleted!",
