@@ -8,8 +8,8 @@
                             <div class="row">
                                 <div class="col-7">
                                     <div class="text-primary p-4">
-                                        <h5 class="text-primary"> Change Password</h5>
-                                        <p>Update your Password</p>
+                                        <h5 class="text-primary"> Reset Password</h5>
+                                        <p>Reset Password with NzCoding.</p>
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -19,7 +19,7 @@
                         </div>
                         <div class="card-body pt-0">
                             <div>
-                                <a href="/">
+                                <a href="index.html">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light">
                                             <img src="{{ asset('assets/images/logo-sm2.png') }}" alt="" class="" height="34">
@@ -41,27 +41,19 @@
                                     </div>
                                 @endif
 
-                                <form class="form-horizontal" wire:submit.prevent='updatePassword' action="">
-                                    <div class="mb-3">
-                                        <label for="userNewPass" class="form-label">New Password</label>
-                                        <input type="password" class="form-control" id="userNewPass" wire:model='password' placeholder="Enter password">
-
-                                        @error('password')
-                                            <span class="text-danger" style="font-size: 12px;">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                <form class="form-horizontal" wire:submit.prevent='resetPassword' action="">
 
                                     <div class="mb-3">
-                                        <label for="userConfPass" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" id="userConfPass" wire:model='confirm_password' placeholder="Re-enter password">
+                                        <label for="useremail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="useremail" wire:model='email' placeholder="Enter email">
 
-                                        @error('confirm_password')
+                                        @error('email')
                                             <span class="text-danger" style="font-size: 12px;">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="text-end">
-                                        <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Change Password</button>
+                                        <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Reset</button>
                                     </div>
 
                                 </form>
@@ -70,7 +62,7 @@
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <p>Remember Old Password ? <a href="{{ route('admin.login') }}" class="fw-medium text-primary"> Sign In here</a> </p>
+                        <p>Remember It ? <a href="{{ route('admin.login') }}" class="fw-medium text-primary"> Sign In here</a> </p>
                         <p>© <script>document.write(new Date().getFullYear())</script> NzCoding</p>
                     </div>
 
