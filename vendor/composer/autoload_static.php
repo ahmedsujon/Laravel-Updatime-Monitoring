@@ -98,6 +98,7 @@ class ComposerStaticInitfd073c588f5c11a02ecacefa69cfa467
             'Spatie\\Ignition\\' => 16,
             'Spatie\\FlareClient\\' => 19,
             'Spatie\\Backtrace\\' => 17,
+            'Shapito27\\Whois\\' => 16,
         ),
         'R' => 
         array (
@@ -367,6 +368,10 @@ class ComposerStaticInitfd073c588f5c11a02ecacefa69cfa467
         'Spatie\\Backtrace\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
+        ),
+        'Shapito27\\Whois\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/shapito27/whois-parser/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -5844,6 +5849,27 @@ class ComposerStaticInitfd073c588f5c11a02ecacefa69cfa467
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Shapito27\\Whois\\Formatters\\AbstractFormatter' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/AbstractFormatter.php',
+        'Shapito27\\Whois\\Formatters\\BE' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/BE.php',
+        'Shapito27\\Whois\\Formatters\\BaseFormatter' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/BaseFormatter.php',
+        'Shapito27\\Whois\\Formatters\\COM' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/COM.php',
+        'Shapito27\\Whois\\Formatters\\COMBR' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/COMBR.php',
+        'Shapito27\\Whois\\Formatters\\COUK' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/COUK.php',
+        'Shapito27\\Whois\\Formatters\\EU' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/EU.php',
+        'Shapito27\\Whois\\Formatters\\FR' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/FR.php',
+        'Shapito27\\Whois\\Formatters\\FormatterFactory' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/FormatterFactory.php',
+        'Shapito27\\Whois\\Formatters\\IL' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/IL.php',
+        'Shapito27\\Whois\\Formatters\\IT' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/IT.php',
+        'Shapito27\\Whois\\Formatters\\KG' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/KG.php',
+        'Shapito27\\Whois\\Formatters\\KR' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/KR.php',
+        'Shapito27\\Whois\\Formatters\\KZ' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/KZ.php',
+        'Shapito27\\Whois\\Formatters\\SI' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/SI.php',
+        'Shapito27\\Whois\\Formatters\\TK' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/TK.php',
+        'Shapito27\\Whois\\Formatters\\UK' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Formatters/UK.php',
+        'Shapito27\\Whois\\ParserResult' => __DIR__ . '/..' . '/shapito27/whois-parser/src/ParserResult.php',
+        'Shapito27\\Whois\\Registrar' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Registrar.php',
+        'Shapito27\\Whois\\Whois' => __DIR__ . '/..' . '/shapito27/whois-parser/src/Whois.php',
+        'Shapito27\\Whois\\WhoisParser' => __DIR__ . '/..' . '/shapito27/whois-parser/src/WhoisParser.php',
         'Spatie\\Backtrace\\Arguments\\ArgumentReducers' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ArgumentReducers.php',
         'Spatie\\Backtrace\\Arguments\\ProvidedArgument' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ProvidedArgument.php',
         'Spatie\\Backtrace\\Arguments\\ReduceArgumentPayloadAction' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ReduceArgumentPayloadAction.php',

@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.3",
+        "shapito27/whois-parser": "^1.10",
         "spatie/laravel-uptime-monitor": "^4.2"
     },
     "require-dev": {

@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'aa33fc1381ae41123066c350cbc2d611a5112104',
+        'reference' => 'ad2a65cdff6bbfc66dc19d99068684c18a284137',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -418,7 +418,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'aa33fc1381ae41123066c350cbc2d611a5112104',
+            'reference' => 'ad2a65cdff6bbfc66dc19d99068684c18a284137',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1024,6 +1024,15 @@
             'install_path' => __DIR__ . '/../sebastian/version',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'shapito27/whois-parser' => array(
+            'pretty_version' => '1.10.3',
+            'version' => '1.10.3.0',
+            'reference' => 'bb08201c95290522523b09749242d19eb19b8fef',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../shapito27/whois-parser',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'spatie/backtrace' => array(
             'pretty_version' => '1.5.3',
