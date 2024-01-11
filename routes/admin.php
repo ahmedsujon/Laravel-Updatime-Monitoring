@@ -35,7 +35,7 @@ Route::prefix('admin/')->name('admin.')->middleware('auth:admin')->group(functio
     
     // My site routes
     Route::get('my-sites', MySitesComponent::class)->name('mysites');
-    Route::get('my-sites-details/{id}', DetailsMySiteComponent::class)->name('mysites.details');
+    Route::get('my-sites-details/{monitor_id}', DetailsMySiteComponent::class)->name('mysites.details');
 
     Route::get('my-doamin', DomainExpiryComponent::class)->name('domains');
 
