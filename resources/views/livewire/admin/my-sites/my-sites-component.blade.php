@@ -64,6 +64,7 @@
                                             <th class="align-middle">SSL Issuer</th>
                                             <th class="align-middle text-center">Uptime</th>
                                             <th class="align-middle text-center">Certificate health</th>
+                                            <th class="align-middle text-center">Certificate Expire</th>
                                             <th class="align-middle text-center">Last checked</th>
                                             <th class="align-middle text-center">Actions</th>
                                         </tr>
@@ -90,6 +91,14 @@
                                                     </td>
                                             @endif
                                             <td class="text-center">{{ $mysite->certificate_status }}</td>
+
+                                            @php
+                                                $dateTime = \Carbon\Carbon::parse($mysite->certificate_expiration_date);
+                                                $now = \Carbon\Carbon::now();
+                                                $daysLeft = $now->diffInDays($dateTime);
+                                            @endphp
+
+                                            <td class="text-center">{{ $daysLeft }} Days</td>
                                             <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
                                             <td class="text-center">
                                                 <button
