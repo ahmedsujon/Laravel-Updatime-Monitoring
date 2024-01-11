@@ -80,12 +80,12 @@
                                                     <td>{{ $mysite->certificate_issuer }}</td>
                                                     <td class="text-center">
                                                         @if ($mysite->uptime_status == 'up')
-                                                            <a href="{{ route('admin.mysites.details', ['id' => $mysite->id]) }}"
+                                                            <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
                                                                 class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
                                                                     class="bx bx-up-arrow-alt ms-1"></i></a>
                                                     </td>
                                                 @else
-                                                    <a href="{{ route('admin.mysites.details', ['id' => $mysite->id]) }}"
+                                                    <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
                                                         class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
                                                             class="bx bx-down-arrow-alt ms-1"></i></a>
                                                     </td>
