@@ -9,13 +9,13 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \Spatie\UptimeMonitor\Notifications\Notifications\UptimeCheckFailed::class => ['slack'],
-            \Spatie\UptimeMonitor\Notifications\Notifications\UptimeCheckRecovered::class => ['slack'],
-            \Spatie\UptimeMonitor\Notifications\Notifications\UptimeCheckSucceeded::class => [],
+            \Spatie\UptimeMonitor\Notifications\Notifications\UptimeCheckFailed::class => ['mail'],
+            \Spatie\UptimeMonitor\Notifications\Notifications\UptimeCheckRecovered::class => ['mail'],
+            \Spatie\UptimeMonitor\Notifications\Notifications\UptimeCheckSucceeded::class => ['mail'],
 
-            \Spatie\UptimeMonitor\Notifications\Notifications\CertificateCheckFailed::class => ['slack'],
-            \Spatie\UptimeMonitor\Notifications\Notifications\CertificateExpiresSoon::class => ['slack'],
-            \Spatie\UptimeMonitor\Notifications\Notifications\CertificateCheckSucceeded::class => [],
+            \Spatie\UptimeMonitor\Notifications\Notifications\CertificateCheckFailed::class => ['mail'],
+            \Spatie\UptimeMonitor\Notifications\Notifications\CertificateExpiresSoon::class => ['mail'],
+            \Spatie\UptimeMonitor\Notifications\Notifications\CertificateCheckSucceeded::class => ['mail'],
         ],
 
         /*
@@ -81,7 +81,7 @@ return [
          * The uptime check for a monitor will fail if the url does not respond after the
          * given number of seconds.
          */
-        'timeout_per_site' => 10,
+        'timeout_per_site' => 20,
 
         /*
          * Because networks can be a bit unreliable the package can make three attempts
@@ -122,7 +122,7 @@ return [
          * when a certificate is found whose expiration date is in
          * the next number of given days.
          */
-        'fire_expiring_soon_event_if_certificate_expires_within_days' => 10,
+        'fire_expiring_soon_event_if_certificate_expires_within_days' => 30,
     ],
 
     /*
