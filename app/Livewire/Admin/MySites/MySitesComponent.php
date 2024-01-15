@@ -6,6 +6,7 @@ use App\Models\Monitor;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class MySitesComponent extends Component
 {
