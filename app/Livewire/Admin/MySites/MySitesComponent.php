@@ -5,11 +5,13 @@ namespace App\Livewire\Admin\MySites;
 use App\Models\Monitor;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Mail\DowntimeNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class MySitesComponent extends Component
 {
+    protected $signature = 'check:uptimenotify';
     use WithPagination;
     public $sortingValue = 50, $searchTerm;
     public $edit_id, $delete_id;
@@ -80,6 +82,14 @@ class MySitesComponent extends Component
         $admin->delete();
         $this->dispatch('monitor_deleted');
         $this->delete_id = '';
+    }
+
+    public function downTimeNotification()
+    {
+        $downDomains = Monitor::where('uptime_status', 'down')->get();
+        foreach ($downDomains as $domain) {
+            Mail::to('gearinsane@gmail.com')->send(new DowntimeNotification($domain->url));
+        }
     }
 
     public function render()
