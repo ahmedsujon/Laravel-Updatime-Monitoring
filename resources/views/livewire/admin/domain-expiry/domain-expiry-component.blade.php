@@ -18,13 +18,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <input wire:model="domain" type="text" placeholder="Enter domain">
-    <button wire:click="getExpirationDate">Get Expiration Date</button>
+                    <button wire:click="getExpirationDate">Get Expiration Date</button>
 
-    <div>
-        @if($expirationDate)
-            <p>Expiration Date: {{ $expirationDate }}</p>
-        @endif
-    </div>
+                    <div>
+                        @if ($expirationDate)
+                            <p>Expiration Date: {{ $expirationDate }}</p>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
