@@ -10,7 +10,7 @@
 
 <body>
     <p>Your site is down: </p>
-    <p>URL: </p>
+    <p>URL:  </p>
 </body>
 
 </html>

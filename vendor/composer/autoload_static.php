@@ -659,6 +659,7 @@ class ComposerStaticInitfd073c588f5c11a02ecacefa69cfa467
         'App\\Livewire\\Vendor\\Layouts\\Inc\\Footer' => __DIR__ . '/../..' . '/app/Livewire/Vendor/Layouts/Inc/Footer.php',
         'App\\Livewire\\Vendor\\Layouts\\Inc\\Header' => __DIR__ . '/../..' . '/app/Livewire/Vendor/Layouts/Inc/Header.php',
         'App\\Livewire\\Vendor\\Layouts\\Inc\\Sidebar' => __DIR__ . '/../..' . '/app/Livewire/Vendor/Layouts/Inc/Sidebar.php',
+        'App\\Mail\\DowntimeNotification' => __DIR__ . '/../..' . '/app/Mail/DowntimeNotification.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Monitor' => __DIR__ . '/../..' . '/app/Models/Monitor.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',

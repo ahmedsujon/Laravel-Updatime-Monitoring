@@ -63,6 +63,7 @@ return array(
     'App\\Livewire\\Vendor\\Layouts\\Inc\\Footer' => $baseDir . '/app/Livewire/Vendor/Layouts/Inc/Footer.php',
     'App\\Livewire\\Vendor\\Layouts\\Inc\\Header' => $baseDir . '/app/Livewire/Vendor/Layouts/Inc/Header.php',
     'App\\Livewire\\Vendor\\Layouts\\Inc\\Sidebar' => $baseDir . '/app/Livewire/Vendor/Layouts/Inc/Sidebar.php',
+    'App\\Mail\\DowntimeNotification' => $baseDir . '/app/Mail/DowntimeNotification.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Monitor' => $baseDir . '/app/Models/Monitor.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',

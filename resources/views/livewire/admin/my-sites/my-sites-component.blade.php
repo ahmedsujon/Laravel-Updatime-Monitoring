@@ -26,6 +26,10 @@
                             <button type="button" wire:click="$refresh"
                                 class="btn btn-sm btn-dark waves-effect waves-light"
                                 style="float: right; margin-right: 5px;"><i class="bx bx-plus"></i>Refresh</button>
+
+                                <button type="button" wire:click="downTimeNotification"
+                                class="btn btn-sm btn-dark waves-effect waves-light"
+                                style="float: right; margin-right: 5px;"><i class="bx bx-plus"></i>Run Work</button>
                         </div>
                         <div class="card-body">
                             <div class="row mb-3">

@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Admin\MySites;
 
+use Carbon\Carbon;
 use App\Models\Monitor;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Mail\DowntimeNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class MySitesComponent extends Component
@@ -87,9 +89,11 @@ class MySitesComponent extends Component
     public function downTimeNotification()
     {
         $downDomains = Monitor::where('uptime_status', 'down')->get();
-        foreach ($downDomains as $domain) {
-            Mail::to('gearinsane@gmail.com')->send(new DowntimeNotification($domain->url));
-        }
+        dispatch(function () use ($downDomains) {
+            foreach ($downDomains as $domain) {
+                Mail::to('gearinsane@gmail.com')->send(new DowntimeNotification($domain->url));
+            }
+        })->delay(Carbon::now()->everyMinute());
     }
 
     public function render()
