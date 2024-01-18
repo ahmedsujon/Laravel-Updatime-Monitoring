@@ -9,8 +9,9 @@
 </head>
 
 <body>
-    <p>The following website is currently down:</p>
-    <p><a href="#"></a></p>
+    <p>The following website domain will expire:</p>
+    <p>Date: </p>
+    <p>20 Days Left</p>
 </body>
 
 </html>

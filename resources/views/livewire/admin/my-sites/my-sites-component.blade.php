@@ -27,7 +27,7 @@
                                 class="btn btn-sm btn-dark waves-effect waves-light"
                                 style="float: right; margin-right: 5px;"><i class="bx bx-plus"></i>Refresh</button>
 
-                                <button type="button" wire:click="downTimeNotification"
+                            <button type="button" wire:click="downTimeNotification"
                                 class="btn btn-sm btn-dark waves-effect waves-light"
                                 style="float: right; margin-right: 5px;"><i class="bx bx-plus"></i>Run Work</button>
                         </div>
@@ -67,6 +67,8 @@
                                             <th class="align-middle">Site</th>
                                             <th class="align-middle">SSL Issuer</th>
                                             <th class="align-middle text-center">Uptime</th>
+                                            <th class="align-middle text-center">Domain Expire</th>
+                                            <th class="align-middle text-center">Remaining Days</th>
                                             <th class="align-middle text-center">Certificate health</th>
                                             <th class="align-middle text-center">Certificate Expire</th>
                                             <th class="align-middle text-center">Last checked</th>
@@ -82,43 +84,51 @@
                                                     <td><a href="{{ $mysite->url }}"
                                                             target="_blank">{{ $mysite->url }}</a></td>
                                                     <td>{{ $mysite->certificate_issuer }}</td>
+                                                    @if ($mysite->uptime_status == 'up')
                                                     <td class="text-center">
-                                                        @if ($mysite->uptime_status == 'up')
-                                                            <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
-                                                                class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
-                                                                    class="bx bx-up-arrow-alt ms-1"></i></a>
+                                                        <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
+                                                            class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
+                                                                class="bx bx-up-arrow-alt ms-1"></i></a>
                                                     </td>
-                                                @else
-                                                    <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
-                                                        class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
-                                                            class="bx bx-down-arrow-alt ms-1"></i></a>
+                                                    @else
+                                                    <td class="text-center">
+                                                        <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
+                                                            class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
+                                                                class="bx bx-down-arrow-alt ms-1"></i></a>
                                                     </td>
-                                            @endif
-                                            <td class="text-center">{{ $mysite->certificate_status }}</td>
+                                                    @endif
+                                                    <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
+                                                    @php
+                                                        $dateTime = \Carbon\Carbon::parse($mysite->domain_expiry_date);
+                                                        $now = \Carbon\Carbon::now();
+                                                        $daysLeft = $now->diffInDays($dateTime);
+                                                    @endphp
+                                                    <td class="text-center">{{ $daysLeft }}</td>
+                                                    <td class="text-center">{{ $mysite->certificate_status }}</td>
 
-                                            @php
-                                                $dateTime = \Carbon\Carbon::parse($mysite->certificate_expiration_date);
-                                                $now = \Carbon\Carbon::now();
-                                                $daysLeft = $now->diffInDays($dateTime);
-                                            @endphp
+                                                    @php
+                                                        $dateTime = \Carbon\Carbon::parse($mysite->certificate_expiration_date);
+                                                        $now = \Carbon\Carbon::now();
+                                                        $daysLeft = $now->diffInDays($dateTime);
+                                                    @endphp
 
-                                            <td class="text-center">{{ $daysLeft }} Days</td>
-                                            <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
-                                            <td class="text-center">
-                                                <button
-                                                    class="btn btn-sm btn-soft-primary waves-effect waves-light action-btn edit_btn"
-                                                    wire:click.prevent='editData({{ $mysite->id }})'
-                                                    wire:loading.attr='disabled'>
-                                                    <i
-                                                        class="mdi mdi-square-edit-outline font-size-13 align-middle"></i>
-                                                </button>
-                                                <button
-                                                    class="btn btn-sm btn-soft-danger waves-effect waves-light action-btn delete_btn"
-                                                    wire:click.prevent='deleteConfirmation({{ $mysite->id }})'
-                                                    wire:loading.attr='disabled'>
-                                                    <i class="bx bx-trash font-size-13 align-middle"></i>
-                                                </button>
-                                            </td>
+                                                    <td class="text-center">{{ $daysLeft }} Days</td>
+                                                    <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
+                                                    <td class="text-center">
+                                                        <button
+                                                            class="btn btn-sm btn-soft-primary waves-effect waves-light action-btn edit_btn"
+                                                            wire:click.prevent='editData({{ $mysite->id }})'
+                                                            wire:loading.attr='disabled'>
+                                                            <i
+                                                                class="mdi mdi-square-edit-outline font-size-13 align-middle"></i>
+                                                        </button>
+                                                        <button
+                                                            class="btn btn-sm btn-soft-danger waves-effect waves-light action-btn delete_btn"
+                                                            wire:click.prevent='deleteConfirmation({{ $mysite->id }})'
+                                                            wire:loading.attr='disabled'>
+                                                            <i class="bx bx-trash font-size-13 align-middle"></i>
+                                                        </button>
+                                                    </td>
                                             </tr>
                                         @endforeach
                                     @else
@@ -141,8 +151,8 @@
 
 
     <!-- Add Data Modal -->
-    <div wire:ignore.self class="modal fade" id="addDataModal" tabindex="-1" role="dialog" data-bs-backdrop="static"
-        data-bs-keyboard="false" aria-labelledby="modelTitleId">
+    <div wire:ignore.self class="modal fade" id="addDataModal" tabindex="-1" role="dialog"
+        data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modelTitleId">
         <div class="modal-dialog modal-dialog-centered modal-dialog-zoom modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background: white;">
@@ -156,9 +166,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="example-number-input" class="col-form-label">URL</label>
-                                        <input class="form-control mb-2" type="text" wire:model="url"
+                                        <input class="form-control mb-2" type="text" wire:model="domain"
                                             placeholder="https://intrigueit.com/">
-                                        @error('url')
+                                        @error('domain')
                                             <p class="text-danger" style="font-size: 11.5px;">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -195,9 +205,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="example-number-input" class="col-form-label">URL</label>
-                                        <input class="form-control mb-2" type="text" wire:model="url"
+                                        <input class="form-control mb-2" type="text" wire:model="domain"
                                             placeholder="https://intrigueit.com/">
-                                        @error('url')
+                                        @error('domain')
                                             <p class="text-danger" style="font-size: 11.5px;">{{ $message }}</p>
                                         @enderror
                                     </div>

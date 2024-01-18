@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 
 class IntrigueitUptimeCheck extends Command
 {
+    public $url;
+
     /**
      * The name and signature of the console command.
      *
@@ -27,6 +29,19 @@ class IntrigueitUptimeCheck extends Command
     /**
      * Execute the console command.
      */
+
+    // public function handle()
+    // {
+    //     $downDomains = Monitor::where('uptime_status', 'down')->get();
+    //     $mailData['url'] = $this->url;
+    //     foreach ($downDomains as  $domain) {
+    //         Mail::send('emails.downtimenotify', $mailData, function ($message) use ($mailData, $domain) {
+    //             $message->to('gearinsane@gmail.com')
+    //                 ->subject('Downtime Notification!');
+    //         });
+    //     }
+    // }
+
     public function handle()
     {
         $downDomains = Monitor::where('uptime_status', 'down')->get();
@@ -35,7 +50,5 @@ class IntrigueitUptimeCheck extends Command
                 Mail::to('gearinsane@gmail.com')->send(new DowntimeNotification($domain->url));
             }
         });
-        
-        // info('Intrigueit Updatime Check');
     }
 }
