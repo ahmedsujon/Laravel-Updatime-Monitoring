@@ -17,22 +17,35 @@ class MySitesComponent extends Component
     use WithPagination;
     public $sortingValue = 50, $searchTerm;
     public $edit_id, $delete_id;
-    public $url, $uptime_status, $uptime_last_check_date, $certificate_status, $certificate_expiration_date,
-        $certificate_issuer, $certificate_check_failure_reason, $uptime_status_last_change_date, $uptime_check_method;
+    public $domain, $url, $uptime_status, $uptime_last_check_date, $certificate_status, $certificate_expiration_date,
+    $certificate_issuer, $certificate_check_failure_reason, $uptime_status_last_change_date, $uptime_check_method, $expirationDate;
 
     public function storeData()
     {
+        $apiKey = 'at_LESoEublmDSqdDO7Er118tNmgytrW';
+        $url = "https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey={$apiKey}&domainName={$this->domain}&outputFormat=json";
+
+        $response = Http::get($url);
+        $responseData = $response->json();
+
         $this->validate([
-            'url' => 'required|url|unique:monitors,url',
+            'domain' => 'required|url|unique:monitors,url',
         ]);
 
-        $data = new Monitor();
-        $data->url = $this->url;
-        $data->uptime_status_last_change_date = date('Y-m-d H:i:s');
-        $data->uptime_check_method = 'head';
-        $data->certificate_check_enabled = 1;
+        $monitor = new Monitor();
+        $monitor->url = $this->domain;
+        $monitor->uptime_status_last_change_date = date('Y-m-d H:i:s');
+        $monitor->uptime_check_method = 'head';
+        $monitor->certificate_check_enabled = 1;
 
-        $data->save();
+        if (isset($responseData['WhoisRecord']['registryData']['expiresDate'])) {
+            $this->expirationDate = $responseData['WhoisRecord']['registryData']['expiresDate'];
+        } else {
+            $this->expirationDate = 'Not available';
+        }
+        $monitor->domain_expiry_date = $this->expirationDate;
+
+        $monitor->save();
         $this->dispatch('closeModal');
         $this->dispatch('success', ['message' => 'New url added successfully']);
         $this->resetInputs();
@@ -48,18 +61,45 @@ class MySitesComponent extends Component
 
     public function updateData()
     {
+        $apiKey = 'at_LESoEublmDSqdDO7Er118tNmgytrW';
+        $url = "https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey={$apiKey}&domainName={$this->domain}&outputFormat=json";
+
+        $response = Http::get($url);
+        $responseData = $response->json();
+
         $this->validate([
-            'url' => 'required',
+            'domain' => 'required|url|unique:monitors,url',
         ]);
 
-        $user = Monitor::find($this->edit_id);
-        $user->url = $this->url;
-        $user->save();
+        $monitor = Monitor::find($this->edit_id);
+        $monitor->url = $this->domain;
+        if (isset($responseData['WhoisRecord']['registryData']['expiresDate'])) {
+            $this->expirationDate = $responseData['WhoisRecord']['registryData']['expiresDate'];
+        } else {
+            $this->expirationDate = 'Not available';
+        }
+        $monitor->domain_expiry_date = $this->expirationDate;
+        $monitor->save();
 
         $this->dispatch('closeModal');
         $this->dispatch('success', ['message' => 'URL updated successfully']);
         $this->resetInputs();
     }
+    
+    // public function updateData()
+    // {
+    //     $this->validate([
+    //         'url' => 'required',
+    //     ]);
+
+    //     $user = Monitor::find($this->edit_id);
+    //     $user->url = $this->url;
+    //     $user->save();
+
+    //     $this->dispatch('closeModal');
+    //     $this->dispatch('success', ['message' => 'URL updated successfully']);
+    //     $this->resetInputs();
+    // }
 
     public function close()
     {
@@ -94,6 +134,23 @@ class MySitesComponent extends Component
                 Mail::to('gearinsane@gmail.com')->send(new DowntimeNotification($domain->url));
             }
         })->delay(Carbon::now()->everyMinute());
+    }
+
+    public function expireDomainNotification()
+    {
+        $expiredomains = DB::table('monitors')->pluck('domain_expiry_date');
+        foreach ($expiredomains as $date) {
+            $dateTime = Carbon::parse($date);
+            $now = Carbon::now();
+            $daysLeft = $now->diffInDays($dateTime);
+
+            if ($daysLeft < 90) {
+                Mail::send('emails.downtimenotify', $daysLeft, function ($message) use ($daysLeft, $date) {
+                    $message->to('gearinsane@gmail.com')
+                        ->subject('Downtime Notification!');
+                });
+            }
+        }
     }
 
     public function render()
