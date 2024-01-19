@@ -68,7 +68,7 @@ class MySitesComponent extends Component
         $responseData = $response->json();
 
         $this->validate([
-            'domain' => 'required|url|unique:monitors,url',
+            'domain' => 'required',
         ]);
 
         $monitor = Monitor::find($this->edit_id);
