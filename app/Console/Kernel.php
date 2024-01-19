@@ -13,10 +13,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('monitor:check-uptime')->everyTenMinutes();
-        $schedule->command('monitor:check-certificate')->everyTenMinutes();
-        $schedule->command('intrigueit:uptime-check')->everyTenMinutes();
-        $schedule->command('intrigueit:expiry-domain-check')->everyTenMinutes();
+        $schedule->command('monitor:check-uptime')->daily();
+        $schedule->command('monitor:check-certificate')->daily();
+        $schedule->command('intrigueit:uptime-check')->daily();
+        $schedule->command('intrigueit:expiry-domain-check')->daily();
     }
 
     /**
