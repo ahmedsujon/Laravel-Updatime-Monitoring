@@ -108,7 +108,7 @@ class MySitesComponent extends Component
 
     public function resetInputs()
     {
-        $this->url = null;
+        $this->domain = null;
         $this->edit_id = null;
     }
 

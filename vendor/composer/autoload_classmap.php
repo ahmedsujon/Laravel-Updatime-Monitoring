@@ -11,6 +11,8 @@ return array(
     'App\\Actions\\Fortify\\ResetUserPassword' => $baseDir . '/app/Actions/Fortify/ResetUserPassword.php',
     'App\\Actions\\Fortify\\UpdateUserPassword' => $baseDir . '/app/Actions/Fortify/UpdateUserPassword.php',
     'App\\Actions\\Fortify\\UpdateUserProfileInformation' => $baseDir . '/app/Actions/Fortify/UpdateUserProfileInformation.php',
+    'App\\Console\\Commands\\ExpiryDomainCheck' => $baseDir . '/app/Console/Commands/ExpiryDomainCheck.php',
+    'App\\Console\\Commands\\IntrigueitUptimeCheck' => $baseDir . '/app/Console/Commands/IntrigueitUptimeCheck.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',

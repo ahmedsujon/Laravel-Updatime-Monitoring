@@ -35,9 +35,9 @@ class ExpiryDomainCheck extends Command
             $daysLeft = $now->diffInDays($dateTime);
             $mailData['url'] = $domain->url;
             $mailData['daysLeft'] = $daysLeft;
-            if ($daysLeft < 90) {
+            if ($daysLeft < 30) {
                 Mail::send('emails.expiredomainnotify', $mailData, function ($message) use ($mailData) {
-                    $message->to('gearinsane@gmail.com')
+                    $message->to(['gearinsane@gmail.com', 'sujonahmed424@gmail.com'])
                         ->subject('Domain Expiry Notification!');
                 });
             }

@@ -34,7 +34,7 @@ class IntrigueitUptimeCheck extends Command
         foreach ($downDomains as $domain) {
             $domainData['url'] = $domain->url;
             Mail::send('emails.downtimenotify', $domainData, function ($message) use ($domainData) {
-                $message->to('gearinsane@gmail.com')
+                $message->to(['gearinsane@gmail.com', 'sujonahmed424@gmail.com'])
                     ->subject('Downtime Notification!');
             });
         }
