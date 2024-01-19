@@ -342,7 +342,6 @@
 
                                         <h3>Your domain, <a href="{{ $url }}">{{ $url }}</a> , is expiring on within {{ $daysLeft }} days.
                                             Act now to renew and avoid disruptions.</h3>
-                                        <p><a href="{{ $url }}" class="btn btn-primary">Visit Vite</a></p>
                                     </div>
                                 </td>
                             </tr>

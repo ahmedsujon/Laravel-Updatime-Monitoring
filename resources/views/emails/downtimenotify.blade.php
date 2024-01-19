@@ -336,7 +336,6 @@
                                         <h2>Dear IntrigueIT,</h2>
                                         <h3>We regret to inform you that <a href="{{ $url }}">{{ $url }}</a> is currently
                                             down. Our team is actively addressing the issue. We appreciate your understanding.</h3>
-                                        <p><a href="{{ $url }}" class="btn btn-primary">Visit Vite</a></p>
                                     </div>
                                 </td>
                             </tr>
