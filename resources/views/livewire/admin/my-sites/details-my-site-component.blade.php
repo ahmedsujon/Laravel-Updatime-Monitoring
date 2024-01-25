@@ -101,7 +101,12 @@
                                         <div class="col-sm-12">
                                             <p style="text-align: center;" class="text-muted">Your domain seems to be
                                                 ok. We last checked {{ $minutesAgo }} hour ago.</p>
-                                            <h5 style="text-align: center;">EXPIRES IN 2 months from now</h5>
+                                            @php
+                                                $dateTime = \Carbon\Carbon::parse($mysite->domain_expiry_date);
+                                                $now = \Carbon\Carbon::now();
+                                                $daysLeft = $now->diffInDays($dateTime);
+                                            @endphp
+                                            <h5 style="text-align: center;">EXPIRES IN {{ $daysLeft }} days from now</h5>
                                         </div>
                                     </div>
                                 </div>
