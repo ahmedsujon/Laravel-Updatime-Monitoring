@@ -5,6 +5,20 @@
                 <div class="col-12">
                     <h1 style="text-align: center;" class="page-title-box">List Of Live Sites</h1>
                 </div>
+                <div style="text-align: center;" class="col-12">
+                    <button wire:click='runScheduledTasks' class="btn btn-primary waves-effect waves-light" type="submit"
+                        wire:loading.attr="disabled">
+                        <span wire:loading wire:target="runScheduledTasks">Please wait scheduled tasks running...</span>
+                        <span wire:loading.remove>Refresh</span>
+                    </button>
+                </div>
+                <div>
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+                </div>
             </div>
 
             <div class="row">
@@ -61,15 +75,15 @@
                                                 'id' => 'domain_expiry_date',
                                                 'thDisplayName' => 'Remaining Days',
                                             ])
-                                             @include('livewire.app.datatable.datatable-sorting', [
+                                            @include('livewire.app.datatable.datatable-sorting', [
                                                 'id' => 'certificate_status',
                                                 'thDisplayName' => 'Certificate health',
                                             ])
-                                             @include('livewire.app.datatable.datatable-sorting', [
+                                            @include('livewire.app.datatable.datatable-sorting', [
                                                 'id' => 'certificate_status',
                                                 'thDisplayName' => 'Certificate Expire',
                                             ])
-                                             @include('livewire.app.datatable.datatable-sorting', [
+                                            @include('livewire.app.datatable.datatable-sorting', [
                                                 'id' => 'uptime_last_check_date',
                                                 'thDisplayName' => 'Last checked',
                                             ])
@@ -78,41 +92,41 @@
                                     <tbody>
                                         @if ($live_sites->count() > 0)
                                             @foreach ($live_sites as $mysite)
-                                            <tr>
-                                                <td>{{ $mysite->id }}</td>
-                                                <td><a href="{{ $mysite->url }}"
-                                                        target="_blank">{{ $mysite->url }}</a></td>
-                                                @if ($mysite->uptime_status == 'up')
-                                                    <td class="text-center">
-                                                        <a href="{{ route('app.mysites.details', ['monitor_id' => $mysite->id]) }}"
-                                                            class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
-                                                                class="bx bx-up-arrow-alt ms-1"></i></a>
-                                                    </td>
-                                                @else
-                                                    <td class="text-center">
-                                                        <a href="{{ route('app.mysites.details', ['monitor_id' => $mysite->id]) }}"
-                                                            class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
-                                                                class="bx bx-down-arrow-alt ms-1"></i></a>
-                                                    </td>
-                                                @endif
-                                                <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
-                                                @php
-                                                    $dateTime = \Carbon\Carbon::parse($mysite->domain_expiry_date);
-                                                    $now = \Carbon\Carbon::now();
-                                                    $daysLeft = $now->diffInDays($dateTime);
-                                                @endphp
-                                                <td class="text-center">{{ $daysLeft }}</td>
-                                                <td class="text-center">{{ $mysite->certificate_status }}</td>
+                                                <tr>
+                                                    <td>{{ $mysite->id }}</td>
+                                                    <td><a href="{{ $mysite->url }}"
+                                                            target="_blank">{{ $mysite->url }}</a></td>
+                                                    @if ($mysite->uptime_status == 'up')
+                                                        <td class="text-center">
+                                                            <a href="{{ route('app.mysites.details', ['monitor_id' => $mysite->id]) }}"
+                                                                class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
+                                                                    class="bx bx-up-arrow-alt ms-1"></i></a>
+                                                        </td>
+                                                    @else
+                                                        <td class="text-center">
+                                                            <a href="{{ route('app.mysites.details', ['monitor_id' => $mysite->id]) }}"
+                                                                class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
+                                                                    class="bx bx-down-arrow-alt ms-1"></i></a>
+                                                        </td>
+                                                    @endif
+                                                    <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
+                                                    @php
+                                                        $dateTime = \Carbon\Carbon::parse($mysite->domain_expiry_date);
+                                                        $now = \Carbon\Carbon::now();
+                                                        $daysLeft = $now->diffInDays($dateTime);
+                                                    @endphp
+                                                    <td class="text-center">{{ $daysLeft }}</td>
+                                                    <td class="text-center">{{ $mysite->certificate_status }}</td>
 
-                                                @php
-                                                    $dateTime = \Carbon\Carbon::parse($mysite->certificate_expiration_date);
-                                                    $now = \Carbon\Carbon::now();
-                                                    $daysLeft = $now->diffInDays($dateTime);
-                                                @endphp
+                                                    @php
+                                                        $dateTime = \Carbon\Carbon::parse($mysite->certificate_expiration_date);
+                                                        $now = \Carbon\Carbon::now();
+                                                        $daysLeft = $now->diffInDays($dateTime);
+                                                    @endphp
 
-                                                <td class="text-center">{{ $daysLeft }} Days</td>
-                                                <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
-                                            </tr>
+                                                    <td class="text-center">{{ $daysLeft }} Days</td>
+                                                    <td class="text-center">{{ $mysite->uptime_last_check_date }}</td>
+                                                </tr>
                                             @endforeach
                                         @else
                                             <tr>
