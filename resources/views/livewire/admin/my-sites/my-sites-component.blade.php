@@ -85,17 +85,17 @@
                                                             target="_blank">{{ $mysite->url }}</a></td>
                                                     <td>{{ $mysite->certificate_issuer }}</td>
                                                     @if ($mysite->uptime_status == 'up')
-                                                    <td class="text-center">
-                                                        <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
-                                                            class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
-                                                                class="bx bx-up-arrow-alt ms-1"></i></a>
-                                                    </td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
+                                                                class="btn btn-success waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
+                                                                    class="bx bx-up-arrow-alt ms-1"></i></a>
+                                                        </td>
                                                     @else
-                                                    <td class="text-center">
-                                                        <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
-                                                            class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
-                                                                class="bx bx-down-arrow-alt ms-1"></i></a>
-                                                    </td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
+                                                                class="btn btn-warning waves-effect waves-light btn-sm">{{ $mysite->uptime_status }}<i
+                                                                    class="bx bx-down-arrow-alt ms-1"></i></a>
+                                                        </td>
                                                     @endif
                                                     <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
                                                     @php
@@ -129,12 +129,13 @@
                                                             <i class="bx bx-trash font-size-13 align-middle"></i>
                                                         </button>
                                                     </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="7" class="text-center pt-5 pb-5">No my sites found!
+                                                </td>
                                             </tr>
-                                        @endforeach
-                                    @else
-                                        <tr>
-                                            <td colspan="7" class="text-center pt-5 pb-5">No my sites found!</td>
-                                        </tr>
                                         @endif
                                     </tbody>
                                 </table>

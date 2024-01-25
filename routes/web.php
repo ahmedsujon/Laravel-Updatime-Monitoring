@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\App\HomeComponent;
+use App\Livewire\App\SiteDetailsComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeComponent::class)->name('app.home');
+Route::get('app-my-sites-details/{monitor_id}', SiteDetailsComponent::class)->name('app.mysites.details');
 
 //Call Route Files
 require __DIR__ . '/admin.php';
