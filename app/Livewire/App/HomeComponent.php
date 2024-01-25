@@ -28,7 +28,7 @@ class HomeComponent extends Component
         $this->resetPage();
     }
 
-    #[Title('Found Dogs')]
+    #[Title('IntrigueIT Uptime Monitoring')]
     
     public function render()
     {
