@@ -109,29 +109,13 @@
                                                                     class="bx bx-down-arrow-alt ms-1"></i></a>
                                                         </td>
                                                     @endif
-                                                    {{-- <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
+                                                    <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
                                                     @php
                                                         $dateTime = \Carbon\Carbon::parse($mysite->domain_expiry_date);
                                                         $now = \Carbon\Carbon::now();
                                                         $daysLeft = $now->diffInDays($dateTime);
                                                     @endphp
-                                                    <td class="text-center">{{ $daysLeft }}</td> --}}
-
-                                                    <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
-                                                    @php
-                                                        $dateTime = \Carbon\Carbon::parse($mysite->certificate_expiration_date);
-                                                        $now = \Carbon\Carbon::now();
-                                                        $daysLeft = $now->diffInDays($dateTime);
-                                                    @endphp
-
-                                                    <td class="text-center">
-                                                        @if ($daysLeft >= 0)
-                                                            {{ $daysLeft }} days left
-                                                        @else
-                                                            Certificate expired {{ abs($daysLeft) }} days ago
-                                                        @endif
-                                                    </td>
-
+                                                    <td class="text-center">{{ $daysLeft }} Days Left</td>
                                                     <td class="text-center">{{ $mysite->certificate_status }}</td>
 
                                                     @php
