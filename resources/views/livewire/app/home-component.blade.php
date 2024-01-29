@@ -116,6 +116,8 @@
                                                         $daysLeft = $now->diffInDays($dateTime);
                                                     @endphp
                                                     <td class="text-center">{{ $daysLeft }}</td> --}}
+
+                                                    <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
                                                     @php
                                                         $dateTime = \Carbon\Carbon::parse($mysite->certificate_expiration_date);
                                                         $now = \Carbon\Carbon::now();
