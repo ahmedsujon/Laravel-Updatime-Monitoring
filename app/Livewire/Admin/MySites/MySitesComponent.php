@@ -13,12 +13,28 @@ use Illuminate\Support\Facades\Mail;
 
 class MySitesComponent extends Component
 {
-    protected $signature = 'check:uptimenotify';
+    public $loading;
     use WithPagination;
-    public $sortingValue = 50, $searchTerm;
+    public $sortingValue = 50, $searchTerm, $sortBy = 'created_at', $sortDirection = 'DESC';
     public $edit_id, $delete_id;
     public $domain, $url, $uptime_status, $uptime_last_check_date, $certificate_status, $certificate_expiration_date,
-    $certificate_issuer, $certificate_check_failure_reason, $uptime_status_last_change_date, $uptime_check_method, $expirationDate;
+        $certificate_issuer, $certificate_check_failure_reason, $uptime_status_last_change_date, $uptime_check_method, $expirationDate;
+    protected $signature = 'check:uptimenotify';
+
+    public function setSortBy($sortByField)
+    {
+        if ($this->sortBy === $sortByField) {
+            $this->sortDirection = ($this->sortDirection ==  "ASC") ? 'DESC' : "ASC";
+            return;
+        }
+        $this->sortBy = $sortByField;
+        $this->sortDirection = 'DESC';
+    }
+
+    public function updateSearch()
+    {
+        $this->resetPage();
+    }
 
     public function storeData()
     {
@@ -85,7 +101,7 @@ class MySitesComponent extends Component
         $this->dispatch('success', ['message' => 'URL updated successfully']);
         $this->resetInputs();
     }
-    
+
     // public function updateData()
     // {
     //     $this->validate([
@@ -155,7 +171,12 @@ class MySitesComponent extends Component
 
     public function render()
     {
-        $mysites = DB::table('monitors')->where('url', 'like', '%' . $this->searchTerm . '%')->orderBy('id', 'DESC')->paginate($this->sortingValue);
+        $mysites = Monitor::where('url', 'like', '%' . $this->searchTerm . '%')
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->paginate($this->sortingValue);
+        $this->dispatch('reload_scripts');
+
+        // $mysites = DB::table('monitors')->where('url', 'like', '%' . $this->searchTerm . '%')->orderBy('id', 'DESC')->paginate($this->sortingValue);
         return view('livewire.admin.my-sites.my-sites-component', ['mysites' => $mysites])->layout('livewire.admin.layouts.base');
     }
 }

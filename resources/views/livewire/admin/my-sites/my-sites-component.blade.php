@@ -63,27 +63,48 @@
                                 <table class="table align-middle table-nowrap table-bordered mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">ID</th>
-                                            <th class="align-middle">Site</th>
-                                            <th class="align-middle">SSL Issuer</th>
-                                            <th class="align-middle text-center">Uptime</th>
-                                            <th class="align-middle text-center">Domain Expire</th>
-                                            <th class="align-middle text-center">Remaining Days</th>
-                                            <th class="align-middle text-center">Certificate health</th>
-                                            <th class="align-middle text-center">Certificate Expire</th>
-                                            <th class="align-middle text-center">Last checked</th>
+                                            @include('livewire.admin.datatable.datatable-sorting', [
+                                                'id' => 'id',
+                                                'thDisplayName' => 'ID',
+                                            ])
+                                            @include('livewire.admin.datatable.datatable-sorting', [
+                                                'id' => 'url',
+                                                'thDisplayName' => 'Site',
+                                            ])
+                                            @include('livewire.admin.datatable.datatable-sorting', [
+                                                'id' => 'uptime_status',
+                                                'thDisplayName' => 'Uptime',
+                                            ])
+                                            @include('livewire.admin.datatable.datatable-sorting', [
+                                                'id' => 'domain_expiry_date',
+                                                'thDisplayName' => 'Domain Expire',
+                                            ])
+                                            @include('livewire.admin.datatable.datatable-sorting', [
+                                                'id' => 'domain_expiry_date',
+                                                'thDisplayName' => 'Remaining Days',
+                                            ])
+                                            @include('livewire.admin.datatable.datatable-sorting', [
+                                                'id' => 'certificate_status',
+                                                'thDisplayName' => 'Certificate health',
+                                            ])
+                                            @include('livewire.admin.datatable.datatable-sorting', [
+                                                'id' => 'certificate_status',
+                                                'thDisplayName' => 'Certificate Expire',
+                                            ])
+                                            @include('livewire.admin.datatable.datatable-sorting', [
+                                                'id' => 'uptime_last_check_date',
+                                                'thDisplayName' => 'Last checked',
+                                            ])
                                             <th class="align-middle text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @if ($mysites->count() > 0)
                                             @foreach ($mysites as $mysite)
                                                 <tr>
                                                     <td>{{ $mysite->id }}</td>
                                                     <td><a href="{{ $mysite->url }}"
                                                             target="_blank">{{ $mysite->url }}</a></td>
-                                                    <td>{{ $mysite->certificate_issuer }}</td>
                                                     @if ($mysite->uptime_status == 'up')
                                                         <td class="text-center">
                                                             <a href="{{ route('admin.mysites.details', ['monitor_id' => $mysite->id]) }}"
@@ -103,7 +124,7 @@
                                                         $now = \Carbon\Carbon::now();
                                                         $daysLeft = $now->diffInDays($dateTime);
                                                     @endphp
-                                                    <td class="text-center">{{ $daysLeft }}</td>
+                                                    <td class="text-center">{{ $daysLeft }} Days Left</td>
                                                     <td class="text-center">{{ $mysite->certificate_status }}</td>
 
                                                     @php
@@ -133,7 +154,7 @@
                                             @endforeach
                                         @else
                                             <tr>
-                                                <td colspan="7" class="text-center pt-5 pb-5">No my sites found!
+                                                <td colspan="7" class="text-center pt-5 pb-5">No lost dogs found!
                                                 </td>
                                             </tr>
                                         @endif
@@ -152,8 +173,8 @@
 
 
     <!-- Add Data Modal -->
-    <div wire:ignore.self class="modal fade" id="addDataModal" tabindex="-1" role="dialog"
-        data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modelTitleId">
+    <div wire:ignore.self class="modal fade" id="addDataModal" tabindex="-1" role="dialog" data-bs-backdrop="static"
+        data-bs-keyboard="false" aria-labelledby="modelTitleId">
         <div class="modal-dialog modal-dialog-centered modal-dialog-zoom modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background: white;">
