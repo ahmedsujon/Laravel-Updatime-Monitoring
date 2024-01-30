@@ -160,7 +160,7 @@ class MySitesComponent extends Component
             $now = Carbon::now();
             $daysLeft = $now->diffInDays($dateTime);
 
-            if ($daysLeft < 90) {
+            if ($daysLeft < 30) {
                 Mail::send('emails.downtimenotify', $daysLeft, function ($message) use ($daysLeft, $date) {
                     $message->to('gearinsane@gmail.com')
                         ->subject('Downtime Notification!');

@@ -110,12 +110,20 @@
                                                         </td>
                                                     @endif
                                                     <td class="text-center">{{ $mysite->domain_expiry_date }}</td>
+
                                                     @php
                                                         $dateTime = \Carbon\Carbon::parse($mysite->domain_expiry_date);
                                                         $now = \Carbon\Carbon::now();
                                                         $daysLeft = $now->diffInDays($dateTime);
                                                     @endphp
-                                                    <td class="text-center">{{ $daysLeft }} Days Left</td>
+                                                    <td class="text-center">
+                                                        @if ($daysLeft >= 0)
+                                                            {{ $daysLeft }} Days Left
+                                                        @else
+                                                            {{ abs($daysLeft) }} Days Overdue
+                                                        @endif
+                                                    </td>
+
                                                     <td class="text-center">{{ $mysite->certificate_status }}</td>
 
                                                     @php
