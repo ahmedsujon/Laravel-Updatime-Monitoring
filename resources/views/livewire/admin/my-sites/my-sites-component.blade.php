@@ -22,7 +22,7 @@
                             <h4 class="card-title" style="float: left;">My Site List</h4>
                             <button class="btn btn-sm btn-dark waves-effect waves-light" data-bs-toggle="modal"
                                 data-bs-target="#addDataModal" style="float: right;"><i class="bx bx-plus"></i> Add
-                                Admin</button>
+                                New Site</button>
                             <button type="button" wire:click="$refresh"
                                 class="btn btn-sm btn-dark waves-effect waves-light"
                                 style="float: right; margin-right: 5px;"><i class="bx bx-plus"></i>Refresh</button>
